@@ -66,7 +66,20 @@ header.
 collectives) on real Open Collective months. Every transaction, count, reconciliation and excluded sponsor is in
 [`docs/REPRODUCTION.md`](docs/REPRODUCTION.md).
 
-<!-- DEMO-RESULTS -->
+| Match | Collective, window | Open Collective lists (= its own total) | Not matched | Matched | Paid |
+|---|---|---|---|---|---|
+| `match_1` | webpack, October 2026; 0.001 GEN per $, pot 5 GEN, $1,000 cap per donor | 361 contributions, $9,443 | **$4,495** from 71 casino, betting and follower-selling sponsors; **$607** in 204 contributions from accounts created that month (guest checkouts); $1,500 over the cap; $200 unsure; $40 not reviewed | **$2,601** from 62 donors | **2.601 GEN**, plus a 0.5 GEN recount stake, held for webpack; 2.399 GEN back to the matcher |
+| `match_2` | Babel, October 2026; 0.001 GEN per $, pot 1 GEN, no cap | 46 contributions, $6,831 | **$500** from Fun88 (sports betting) | **$6,331** from 45 donors | the whole **1 GEN** pot, held for Babel |
+| `match_3` | Vue.js, December 2026 | | cancelled before the window started; pot credited back | | |
+
+- **Refused, taking nothing:** a date that does not exist (2026-09-31), an account that is a person and not a collective,
+  a slug Open Collective does not have, counting a cancelled match, a claim while webpack publishes no GenLayer wallet,
+  and two withdrawals with nothing credited.
+- **A recount** of `match_1` by a third wallet (0.5 GEN stake) came back the same, so the stake joined webpack's match.
+- **Two independent counts of the same month** (`match_0`, the first live test right after deploying, and `match_1`):
+  every number made in code was identical, and the validators' sponsor labels differed on 5 sponsors, moving the matched
+  total by **$2** ($2,603 against $2,601). That is the variation the 5% tolerance is there for.
+- `totals()` matched the contract's on-chain balance at **four points**, the last after every withdrawal.
 
 ## Who can do what (and the attacks this blocks)
 

@@ -75,7 +75,7 @@ await show(mid(0));
 await show(mid(1));
 await reconcile(C.matcher, "finalized: matches held for the collectives, the rest credited to the matcher");
 await write(C.matcher, "matcher", "withdraw", []);
-await write(C.doubter, "doubter", "withdraw", []);
+await write(C.doubter, "doubter", "withdraw", [], 0n, { expectError: true }); // its whole deposit was the recount stake
 await write(C.matcher, "matcher", "withdraw", [], 0n, { expectError: true }); // nothing left to withdraw
 await reconcile(C.matcher, "end of run, after the withdrawals");
 
