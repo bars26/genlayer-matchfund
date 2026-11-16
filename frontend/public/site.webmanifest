@@ -1,0 +1,10 @@
+{
+  "name": "MatchFund",
+  "short_name": "MatchFund",
+  "description": "Matching funds for Open Collective donations, counted by GenLayer validators",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F6F1",
+  "theme_color": "#F4F6F1",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
