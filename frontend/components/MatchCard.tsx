@@ -74,9 +74,11 @@ export function MatchCard({ match: m }: { match: Match }) {
           </div>
           <div className="text-right">
             <p className="display text-3xl">
-              {formatGen(m.state === "open" ? m.pot : m.match_wei, 3)} <span className="text-base text-muted-foreground">GEN</span>
+              {formatGen(m.state === "open" || m.state === "cancelled" ? m.pot : m.match_wei, 3)} <span className="text-base text-muted-foreground">GEN</span>
             </p>
-            <p className="text-xs text-muted-foreground">{m.state === "open" ? "pot (the most it pays)" : `matched, of a ${formatGen(m.pot, 2)} GEN pot`}</p>
+            <p className="text-xs text-muted-foreground">
+              {m.state === "open" ? "pot (the most it pays)" : m.state === "cancelled" ? "pot, credited back" : `matched, of a ${formatGen(m.pot, 2)} GEN pot`}
+            </p>
           </div>
         </header>
 
