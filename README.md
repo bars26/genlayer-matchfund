@@ -80,6 +80,9 @@ collectives) on real Open Collective months. Every transaction, count, reconcili
   every number made in code was identical, and the validators' sponsor labels differed on 5 sponsors, moving the matched
   total by **$2** ($2,603 against $2,601). That is the variation the 5% tolerance is there for.
 - `totals()` matched the contract's on-chain balance at **four points**, the last after every withdrawal.
+- **A MetaMask test from the live app** (`match_4`, ESLint, October 2026): open, count (47 contributions, $4,085.86;
+  $4,082.86 matched from 44 donors, $3 of new-account money not), recount (upheld), finalize and withdraw, every step
+  ACCEPTED. Its seven transactions are in `docs/ui-test.json` and in REPRODUCTION.
 
 ## Who can do what (and the attacks this blocks)
 

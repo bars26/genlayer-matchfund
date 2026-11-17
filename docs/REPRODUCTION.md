@@ -162,6 +162,20 @@ Check the raw numbers yourself (Open Collective's public API, no key):
 curl -s https://api.opencollective.com/graphql/v2 -H 'content-type: application/json' -d '{"query":"{ account(slug:\"babel\") { stats { contributionsAmount(dateFrom:\"2026-10-01T00:00:00Z\", dateTo:\"2026-11-01T00:00:00Z\") { count amount { valueInCents } } } } }"}'
 ```
 
+## Wallet test from the live app
+
+MetaMask test from the production app (matchfund-bars26.vercel.app) on GenLayer Studio. The tester previews ESLint's October 2026 in the no-wallet panel, opens a match from it (1 GEN per $1,000 given, 5 GEN pot, $1,000 per-donor cap, donor accounts 30+ days old, the default rules), counts it, asks for a recount, finalizes after the 10-minute window and withdraws what came back. The app deposits the pot and the stake before the calls that need a reading; those calls send no GEN. Wallet `0x4f80b5c475fced34fc9a07ffccf39e1adc1406bf`.
+
+| Step | GEN sent | Result | Tx |
+|---|---|---|---|
+| Deposit 5 GEN (sent by the app before opening the match) | 5 GEN | credited to the tester | [0x4c70ada5…](https://explorer-studio.genlayer.com/tx/0x4c70ada5745fbc663a3b5621e430c4c8f669112ab20957f56141d05f298b7caa) |
+| Open a match: ESLint, 2026-10-01 to 2026-10-31, 1 GEN per $1,000, pot 5 GEN from the deposit |  | match_4 open; validators read ESLint (collective, USD, host opensource) from Open Collective | [0x1ddedbfc…](https://explorer-studio.genlayer.com/tx/0x1ddedbfc30a187fc59af28fd17431326be4fdffca7bea7d479ded3792f3a9e12) |
+| Count the window |  | 47 contributions, $4,085.86, equal to Open Collective's own total; $3 from 3 accounts created after 2026-09-01 not matched; no sponsor excluded; $4,082.86 matched from 44 donors: 4.08286 GEN | [0xe568af49…](https://explorer-studio.genlayer.com/tx/0xe568af497421c9e1c9819e53b548fa08d263f2213c5894c0e0648f83565c7751) |
+| Deposit the 0.5 GEN recount stake (sent by the app) | 0.5 GEN | credited to the tester | [0xd6042fb2…](https://explorer-studio.genlayer.com/tx/0xd6042fb21b02dfb46cce93464f9bf0680712dea6c2af80f50f200b7669faecc1) |
+| Ask for a recount |  | UPHELD: the fresh count was the same, so the 0.5 GEN stake joined ESLint's match | [0x6f805ebd…](https://explorer-studio.genlayer.com/tx/0x6f805ebda08861de1a29e2d81fa5190e7eda471eebca4ffdc77e6e7f6bd28899) |
+| Finalize after the 10-minute window |  | awaiting_wallet: 4.58286 GEN (match plus stake) held for ESLint until it publishes a GenLayer wallet; 0.91714 GEN of the pot credited back to the tester | [0xd3626cf5…](https://explorer-studio.genlayer.com/tx/0xd3626cf5d75dbc7d6374d7ee478bffbb73267ab6091c507dc0876874b0ab2fe5) |
+| Withdraw |  | 0.91714 GEN sent to the tester; totals() expected balance 18.68386 GEN equals the contract balance | [0x1efb2d26…](https://explorer-studio.genlayer.com/tx/0x1efb2d2672589243beb3591da22501f61b886c6fbea83eb690f079be7ce14bce) |
+
 ## Every transaction
 
 A refused call is still ACCEPTED by consensus; the contract outcome is the `exec` column (`ERROR` = the contract refused, on purpose here).
@@ -206,4 +220,4 @@ sum must equal the contract's GEN balance on chain.
 | both windows counted, a recount stake added to webpack's match | 16.5 GEN | 0 GEN | 6 GEN | 22.5 GEN | 22.5 GEN | match |
 | finalized: matches held for the collectives, the rest credited to the matcher | 10 GEN | 4.1 GEN | 8.4 GEN | 22.5 GEN | 22.5 GEN | match |
 | end of run, after the withdrawals | 0 GEN | 14.101 GEN | 0 GEN | 14.101 GEN | 14.101 GEN | match |
-| now (when this file was generated) | 0 GEN | 14.101 GEN | 0 GEN | 14.101 GEN | 14.101 GEN | match |
+| now (when this file was generated) | 0 GEN | 18.6839 GEN | 0 GEN | 18.6839 GEN | 18.6839 GEN | match |

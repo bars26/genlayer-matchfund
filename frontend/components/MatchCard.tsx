@@ -28,7 +28,7 @@ import { Button } from "./ui/button";
 const short = (a: string) => (a ? `${a.slice(0, 6)}…${a.slice(-4)}` : "");
 
 export function MatchCard({ match: m }: { match: Match }) {
-  const now = useNow(5_000);
+  const now = useNow(m.state === "tallied" ? 1_000 : 30_000);
   const { address, isConnected } = useWallet();
   const { write, pending } = useMatchWrite();
   const t = tallyOf(m);

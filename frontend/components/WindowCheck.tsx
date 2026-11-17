@@ -83,18 +83,10 @@ export function WindowCheck({ onMatch }: { onMatch: (t: CheckTerms) => void }) {
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <div className="col-span-2 md:col-span-1 space-y-1">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="col-span-2 space-y-1">
           <Label htmlFor="wc-slug">Collective slug</Label>
           <Input id="wc-slug" value={terms.slug} onChange={(e) => setTerms({ ...terms, slug: e.target.value.trim().toLowerCase() })} />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="wc-from">From</Label>
-          <Input id="wc-from" type="date" value={terms.starts} onChange={(e) => setTerms({ ...terms, starts: e.target.value })} />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="wc-to">To</Label>
-          <Input id="wc-to" type="date" value={terms.ends} onChange={(e) => setTerms({ ...terms, ends: e.target.value })} />
         </div>
         <div className="space-y-1">
           <Label htmlFor="wc-age">Min. account age (days)</Label>
@@ -103,6 +95,14 @@ export function WindowCheck({ onMatch }: { onMatch: (t: CheckTerms) => void }) {
         <div className="space-y-1">
           <Label htmlFor="wc-cap">Cap per donor ({cur})</Label>
           <Input id="wc-cap" type="number" min={0} value={terms.cap} onChange={(e) => setTerms({ ...terms, cap: Number(e.target.value) })} />
+        </div>
+        <div className="col-span-2 md:col-span-2 space-y-1">
+          <Label htmlFor="wc-from">From</Label>
+          <Input id="wc-from" type="date" value={terms.starts} onChange={(e) => setTerms({ ...terms, starts: e.target.value })} />
+        </div>
+        <div className="col-span-2 md:col-span-2 space-y-1">
+          <Label htmlFor="wc-to">To</Label>
+          <Input id="wc-to" type="date" value={terms.ends} onChange={(e) => setTerms({ ...terms, ends: e.target.value })} />
         </div>
       </div>
       <Button variant="outline" className="w-full" onClick={() => read()} disabled={busy}>
