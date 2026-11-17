@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/)
 
+<img src="assets/matchfund-logo.png" alt="MatchFund logo" width="96" align="right" />
+
 **Matching funds for Open Collective donations, counted by GenLayer validators from Open Collective's public records.
 Only established donors count: no guest card-testing, no fresh accounts, and none of the sponsors the matcher's rules
 exclude.**
