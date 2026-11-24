@@ -202,7 +202,7 @@ export function useMatchWrite() {
           case "withdraw":
             if (owedBefore === 0n) refuse("Nothing is credited to this wallet.");
             result = await contract.withdraw(onProgress);
-            note = `${formatGen(owedBefore, 4)} GEN sent to your wallet.`;
+            note = `${formatGen(owedBefore, 4)} GEN sent to your wallet (it arrives a few minutes after the transaction finalizes).`;
             break;
         }
         updateTx(logId, { state: "accepted", txHash: result.txHash, status: result.status, executionResult: result.executionResult, progress: note });
